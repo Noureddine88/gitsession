@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-10-26T10:52:31Z",
+  "participants": [
+    {
+      "file": "ExampleGithubName.json",
+      "name": "Example Github Name",
+      "city": "Tunis",
+      "fundact": "Web Development"
+    }
+  ],
+  "invalid": []
+}
