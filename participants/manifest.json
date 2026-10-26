@@ -11,6 +11,12 @@
       "name": "Noureddine",
       "city": "sfax",
       "fundact": "Web ffffff Development"
+    },
+    {
+      "file": "storytold.json",
+      "name": "taher",
+      "city": "sfax",
+      "fundact": "game developper"
     }
   ],
   "invalid": []
