@@ -18,6 +18,7 @@ This project is a beginner-friendly Git workshop where every participant adds a 
 ├── script.js
 ├── README.md
 ├── CONTRIBUTING.md
+├── MTC-LBS-Git-GitHub-Workshop.pptx
 ├── .gitignore
 ├── .github/
 │   └── workflows/
@@ -27,8 +28,9 @@ This project is a beginner-friendly Git workshop where every participant adds a 
 ├── participants/
 │   ├── ExampleGithubName.json
 │   └── manifest.json
-└── .gitignore
 ```
+
+The editable PowerPoint workshop presentation is `MTC-LBS-Git-GitHub-Workshop.pptx`.
 
 ## Local setup
 

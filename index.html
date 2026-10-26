@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="MTC.LBS Git and GitHub workshop participant directory. Learn version control by contributing your own JSON profile."
+      content="MTC.LBS Microsoft Tech Club Git workshop participants."
     />
-    <title>MTC.LBS | Git & GitHub Workshop</title>
+    <title>MTC.LBS | Participants</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,149 +17,38 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="container nav-bar">
-        <div class="brand" aria-label="MTC.LBS home">
-          <span class="brand-mark">MTC</span>
-          <span class="brand-text">.LBS</span>
-        </div>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#participants">Participants</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#resources">Resources</a>
-        </nav>
-      </div>
-    </header>
+    <main class="container">
+      <header class="page-header">
+        <a class="brand" href="./" aria-label="MTC.LBS participants">
+          <span>MTC</span>.LBS
+        </a>
+        <p>Microsoft Tech Club</p>
+      </header>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Microsoft Tech Club</p>
-            <h1>MTC.LBS | Git &amp; GitHub Workshop</h1>
-            <p class="lead">
-              Learn Git by contributing to a shared project. Every club member creates their
-              own JSON profile, adds it to the repository, and helps the team maintain a live
-              participant directory.
-            </p>
-            <div class="cta-group">
-              <a id="repoLink" class="btn btn-primary" href="https://github.com/your-org/mtc-lbs-git-workshop" target="_blank" rel="noreferrer">
-                Repository
-              </a>
-              <a id="forkLink" class="btn btn-secondary" href="https://github.com/your-org/mtc-lbs-git-workshop/fork" target="_blank" rel="noreferrer">
-                Fork Project
-              </a>
-              <a id="gitDocsLink" class="btn btn-ghost" href="https://docs.github.com/en/get-started/using-git" target="_blank" rel="noreferrer">
-                Git Docs
-              </a>
-            </div>
-          </div>
-
-          <div class="hero-card" aria-label="Workshop goals">
-            <h2>What you will learn</h2>
-            <ul>
-              <li>Git basics and branch workflow</li>
-              <li>How to fork and clone a project</li>
-              <li>How to use pull requests safely</li>
-              <li>How to add data without breaking the site</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="controls-panel" aria-label="Participant filters">
-        <div class="container controls-grid">
-          <label>
-            <span>Search</span>
-            <input id="searchInput" type="search" placeholder="Search by name, city, or activity" />
-          </label>
-
-          <label>
-            <span>City</span>
-            <select id="cityFilter">
-              <option value="all">All cities</option>
-            </select>
-          </label>
-
-          <label>
-            <span>Fundamental activity</span>
-            <select id="activityFilter">
-              <option value="all">All activities</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <section id="participants" class="participants-section">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow subtle">Club directory</p>
-              <h2>Workshop participants</h2>
-            </div>
-            <p id="resultCount" class="result-count" aria-live="polite">0 participants</p>
-          </div>
-
-          <div id="participantsGrid" class="participants-grid" aria-live="polite"></div>
-
-          <div id="emptyState" class="empty-state hidden" role="status" aria-live="polite">
-            <h3>No participants match the current filters.</h3>
-            <p>New profiles appear after they are merged into the main branch and the manifest is regenerated.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="workflow" class="workflow-section">
-        <div class="container">
-          <p class="eyebrow subtle">Beginner workflow</p>
-          <h2>How club members contribute</h2>
-
-          <div class="workflow-grid">
-            <article class="step-card">
-              <span class="step-number">1</span>
-              <h3>Fork the project</h3>
-              <p>Open the original repository and create a personal fork in your GitHub account.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">2</span>
-              <h3>Clone your fork</h3>
-              <p>Copy the repository to your device and start a new branch for your contribution.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">3</span>
-              <h3>Add your JSON file</h3>
-              <p>Create a file named after your GitHub username in the participants folder.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">4</span>
-              <h3>Commit and open a pull request</h3>
-              <p>Review the diff, push your branch, and open a pull request for maintainer review.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="resources" class="resources-section">
-        <div class="container resources-box">
+      <section aria-labelledby="page-title">
+        <div class="section-heading">
           <div>
-            <p class="eyebrow subtle">Workshop resources</p>
-            <h2>Learn the full process in the project docs</h2>
+            <p class="eyebrow">Git &amp; GitHub Workshop</p>
+            <h1 id="page-title">Participants</h1>
           </div>
-          <div class="resource-links">
-            <a href="README.md">Read the README</a>
-            <a href="CONTRIBUTING.md">Contribution guide</a>
-            <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
+          <p id="resultCount" class="result-count" aria-live="polite">Loading participants…</p>
         </div>
+
+        <label class="search-label" for="searchInput">Find a participant</label>
+        <input
+          id="searchInput"
+          class="search-input"
+          type="search"
+          placeholder="Search by name, city, or interest"
+          autocomplete="off"
+        />
+
+        <div id="participantsGrid" class="participants-grid" aria-live="polite"></div>
+        <p id="emptyState" class="empty-state hidden" role="status">
+          No participants found. Try another search.
+        </p>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-content">
-        <p>MTC.LBS | Git &amp; GitHub Workshop</p>
-        <p>Built for beginners learning Git, GitHub, collaboration, and safe contribution workflows.</p>
-      </div>
-    </footer>
 
     <script src="script.js"></script>
   </body>

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json
-from datetime import datetime, timezone
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -40,9 +40,12 @@ for json_file in sorted(participants_dir.glob("*.json")):
         invalid_entries.append({"file": json_file.name, "error": str(exc)})
 
 manifest = {
-    "generatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     "participants": valid_entries,
     "invalid": invalid_entries,
 }
 manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print(f"Manifest updated with {len(valid_entries)} valid participants and {len(invalid_entries)} invalid entries.")
+if invalid_entries:
+    for entry in invalid_entries:
+        print(f"Invalid participant file {entry['file']}: {entry['error']}", file=sys.stderr)
+    sys.exit(1)
