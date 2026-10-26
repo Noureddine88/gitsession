@@ -330,6 +330,7 @@ Check the following:
 2. The new JSON file is valid and saved in `participants/`.
 3. The project action ran and generated a fresh `participants/manifest.json`.
 4. The GitHub Pages site was rebuilt or reloaded.
+5. Refresh the page after deployment. The site requests the manifest with a fresh cache key so old CDN/browser copies do not hide newly merged participants.
 
 ### Two participants choose the same GitHub username filename
 

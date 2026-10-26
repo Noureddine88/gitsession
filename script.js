@@ -6,6 +6,7 @@ const emptyState = document.querySelector('#emptyState');
 const resultCount = document.querySelector('#resultCount');
 
 let allParticipants = [];
+const requestVersion = Date.now();
 
 function createParticipantCard(participant) {
   const card = document.createElement('article');
@@ -70,7 +71,7 @@ function renderParticipants() {
 
 async function loadParticipants() {
   try {
-    const response = await fetch(manifestUrl);
+    const response = await fetch(`${manifestUrl}?v=${requestVersion}`, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`Manifest request failed with status ${response.status}`);
     }
@@ -86,7 +87,10 @@ async function loadParticipants() {
           if (typeof file !== 'string' || file.includes('/') || file.includes('\\')) {
             throw new Error('Invalid participant filename');
           }
-          const fileResponse = await fetch(`${participantDir}/${encodeURIComponent(file)}`);
+          const fileResponse = await fetch(
+            `${participantDir}/${encodeURIComponent(file)}?v=${requestVersion}`,
+            { cache: 'no-store' }
+          );
           if (!fileResponse.ok) {
             throw new Error(`HTTP ${fileResponse.status}`);
           }
