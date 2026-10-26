@@ -75,6 +75,7 @@ python3 scripts/generate_manifest.py
 ```
 
 The script validates every JSON file in `participants/*.json`, excluding `manifest.json`, and updates the manifest.
+After a pull request is merged, the site checks for manifest changes every 30 seconds while the page is open and automatically reloads participant cards when the list changes. The manifest-generation workflow must finish before the new participant can appear.
 
 ## GitHub Pages
 

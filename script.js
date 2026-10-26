@@ -5,8 +5,10 @@ const participantsGrid = document.querySelector('#participantsGrid');
 const emptyState = document.querySelector('#emptyState');
 const resultCount = document.querySelector('#resultCount');
 
+const refreshIntervalMs = 30_000;
 let allParticipants = [];
-const requestVersion = Date.now();
+let lastManifestSignature = '';
+let isRefreshing = false;
 
 function createParticipantCard(participant) {
   const card = document.createElement('article');
@@ -69,9 +71,15 @@ function renderParticipants() {
     `${visibleParticipants.length} participant${visibleParticipants.length === 1 ? '' : 's'}`;
 }
 
-async function loadParticipants() {
+async function refreshParticipants() {
+  if (isRefreshing) {
+    return;
+  }
+
+  isRefreshing = true;
+
   try {
-    const response = await fetch(`${manifestUrl}?v=${requestVersion}`, { cache: 'no-store' });
+    const response = await fetch(`${manifestUrl}?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`Manifest request failed with status ${response.status}`);
     }
@@ -81,6 +89,12 @@ async function loadParticipants() {
       throw new Error('Manifest must contain a participants array');
     }
 
+    const manifestSignature = JSON.stringify(manifest.participants);
+    if (manifestSignature === lastManifestSignature) {
+      return;
+    }
+
+    let hasFileErrors = false;
     const results = await Promise.all(
       manifest.participants.map(async ({ file }) => {
         try {
@@ -88,7 +102,7 @@ async function loadParticipants() {
             throw new Error('Invalid participant filename');
           }
           const fileResponse = await fetch(
-            `${participantDir}/${encodeURIComponent(file)}?v=${requestVersion}`,
+            `${participantDir}/${encodeURIComponent(file)}?v=${Date.now()}`,
             { cache: 'no-store' }
           );
           if (!fileResponse.ok) {
@@ -109,20 +123,31 @@ async function loadParticipants() {
           };
         } catch (error) {
           console.error(`Could not load participant file "${file}":`, error);
+          hasFileErrors = true;
           return null;
         }
       })
     );
 
     allParticipants = results.filter(Boolean);
+    if (!hasFileErrors) {
+      lastManifestSignature = manifestSignature;
+    }
     renderParticipants();
   } catch (error) {
     console.error('Unable to load participant manifest:', error);
     resultCount.textContent = 'Participants could not be loaded';
     emptyState.textContent = 'The participant list could not be loaded. Please try again later.';
     emptyState.classList.remove('hidden');
+  } finally {
+    isRefreshing = false;
   }
 }
 
 searchInput.addEventListener('input', renderParticipants);
-loadParticipants();
+refreshParticipants();
+window.setInterval(() => {
+  if (!document.hidden) {
+    refreshParticipants();
+  }
+}, refreshIntervalMs);
