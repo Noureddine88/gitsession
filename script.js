@@ -11,6 +11,26 @@ function createParticipantCard(participant) {
   const card = document.createElement('article');
   card.className = 'participant-card';
 
+  const avatar = document.createElement('img');
+  avatar.className = 'participant-avatar';
+  avatar.src = `https://github.com/${encodeURIComponent(participant.username)}.png?size=160`;
+  avatar.alt = `${participant.name}'s GitHub avatar`;
+  avatar.loading = 'lazy';
+  avatar.referrerPolicy = 'no-referrer';
+
+  const avatarFallback = document.createElement('span');
+  avatarFallback.className = 'participant-avatar-fallback';
+  avatarFallback.textContent = participant.name.trim().charAt(0).toLocaleUpperCase() || '?';
+  avatarFallback.setAttribute('aria-hidden', 'true');
+  avatar.addEventListener('error', () => {
+    avatar.classList.add('hidden');
+    avatarFallback.classList.remove('hidden');
+  });
+
+  const avatarFrame = document.createElement('div');
+  avatarFrame.className = 'participant-avatar-frame';
+  avatarFrame.append(avatar, avatarFallback);
+
   const heading = document.createElement('h2');
   heading.textContent = participant.name;
 
@@ -28,7 +48,7 @@ function createParticipantCard(participant) {
     details.append(row);
   }
 
-  card.append(heading, details);
+  card.append(avatarFrame, heading, details);
   return card;
 }
 
@@ -79,7 +99,10 @@ async function loadParticipants() {
           ) {
             throw new Error('Required string fields: name, city, fundact');
           }
-          return participant;
+          return {
+            ...participant,
+            username: file.slice(0, -'.json'.length)
+          };
         } catch (error) {
           console.error(`Could not load participant file "${file}":`, error);
           return null;

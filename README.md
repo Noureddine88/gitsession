@@ -61,7 +61,7 @@ Each participant file in the `participants/` folder must follow this shape:
 - `city`: the city where the participant lives or studies.
 - `fundact`: the participant's main technical interest or fundamental activity.
 - Keep the property name exactly as `fundact`.
-- Keep filenames aligned with the GitHub username, such as `participants/YOUR_GITHUB_USERNAME.json`.
+- Name the file after the participant's GitHub username, such as `participants/NoureddineGouiaa.json`. The site uses this filename to load the participant's public GitHub avatar; the account must be public for the image to resolve.
 - Do not store passwords, tokens, private addresses, or sensitive data.
 
 ## Manifest generation
