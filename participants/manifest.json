@@ -1,10 +1,22 @@
 {
   "participants": [
     {
+      "file": "bsf.json",
+      "name": "taher",
+      "city": "sfax",
+      "fundact": "game developper"
+    },
+    {
       "file": "noureddine88.json",
       "name": "Noureddine",
       "city": "sfax",
       "fundact": "Web ffffff Development"
+    },
+    {
+      "file": "storytold.json",
+      "name": "taher",
+      "city": "sfax",
+      "fundact": "game developper"
     }
   ],
   "invalid": []
